@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarly Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body { padding-top: 60px; }
+        p { font-size: 17px;}
+        li { font-size: 17px;}
+        .profile-img { max-width: 150px; border-radius: 50%; }
+
+        h1 {color: rgb(0, 204, 255)}
+        h2 {color: red}
+        h3 {color: rgb(96, 204, 8)}
+        h4 {color: rgb(9, 24, 243)}
+        h5 {color: rgb(255, 0, 221)}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Scholar Name</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#publications">Publications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section id="about" class="my-5 text-center">
+            <img src="assets/logo.png" alt="Profile Picture" class="profile-img">
+            <h1>Traffic signs smart detector</h1>
+            <p>Web Application Development | MSD2</p>
+            <p>Roman Ștefan | Tănase Alexandru - Ionuț</p>
+        </section>
+
+        <section id="description" class="my-5">
+            <h2>Description</h2>
+            <h3>Overview</h3>
+            <p>TraS is a web-based application designed for easy and efficient road sign detection from video recordings. Users can upload videos of urban routes, and the system will automatically extract frames, allowing them to navigate through and analyze detected road signs. Each recognized sign is accompanied by relevant information, including its meaning and legal interpretation.</p>
+
+             <p>The goal of TraS is to assist urban planners, autonomous vehicle developers, and traffic management authorities in analyzing road conditions and improving transportation safety.
+            </p>
+            <h3>Objectives</h3>
+            <p>The primary objectives of TraS are:</p> 
+            <ol>
+                <li>Automated Traffic Sign Detection: Accurately identify traffic signs from video recordings using AI-powered object detection.</li>
+                <li>Scalability and Modularity: Implement a microservice-based architecture to allow independent scaling of processing units.</li>
+                <li>Semantic Knowledge Integration: Use an OWL-based ontology to enrich detected traffic signs with additional metadata and regulations.</li>
+                <li>Efficient Video Processing: Split videos into frames and process them asynchronously to optimize detection speed. </li>
+                <li>User Interaction and Reporting:  Provide an interface for users to upload videos, view detections, and report incorrect results to improve the AI model.</li>
+                <li>Cloud-Based Storage and Processing: Utilize cloud services for video storage, data management, and computational tasks.</li>
+            </ol>
+        </section>
+
+        <section id="implementation" class="my-5">
+            <h2>Implementation</h2>
+
+            <br><h3>Overview</h3>
+            <p>The TraS system follows a service-oriented architecture (SOA) composed of multiple independent services that interact through well-defined APIs. 
+                The architecture is designed for scalability, modularity, and efficient traffic sign detection from video recordings. Each component is developed using technologies best suited for its specific function.
+            </p>
+            <p>Frontend: React provides a user-friendly and responsive interface for video uploads, frame navigation, and road sign exploration. Communication with backend is done using REST API`S.</p>
+            <p>Backend: Node.js wtih Express for handling Api requests, coordinates processing, and integrates system components.</p>
+            <p>Video processing service: Developed in Python using OpenCV for extracting frames from video. Stores extracted frames in Google Cloud Storage</p>
+            <p>YOLO detection service: Uses YOLOv8, trained on a custom dataset for traffic sign detection(traffic lights, speed signs and stop signs).
+                Implemented in Python using the Ultralytics YOLO package.
+                Processes frames received from the backend and returns detected traffic signs.
+                </p>
+            <p>
+                MongoDB Service: 
+                Stores video metadata, extracted frames, and detection results.
+                Ensures fast retrieval of stored data for frontend visualization.
+            </p>
+            <p>OWL Knowledge Service: 
+                Uses an RDF triplestore such as Blazegraph.
+                Provides semantic enrichment using SPARQL queries.</p>
+                <p>
+                    Cloud Services: 
+                        GCP Storage for storing raw videos and extracted frames.
+                        GCP Compute Engine or Cloud Run for deploying backend and microservices.
+                </p>
+            <p>This architecture ensures high performance, scalability, and efficient road sign analysis.</p>
+
+            <h4>Frontend</h4>
+            <p>The frontend of the TraS (Traffic Sign Detection) application is developed using React.js, a powerful JavaScript library for building user interfaces. The design focuses on user-friendliness, providing a smooth and intuitive experience for users, while ensuring seamless interaction with backend services through REST APIs.</p>
+            <p>The key features provided by this service are: </p>
+            <ul>
+                <li>Video Upload Interface: Users can easily upload video files for processing.</li>
+                <li>Frame Navigation: Once the video is processed, users can navigate through frames where traffic signs are detected.</li>
+                <li>Traffic Sign Display: Detected traffic signs are visually highlighted, and users can interact with these signs to view more details.</li>
+            </ul>
+            <p>The frontend communicates with the backend using REST APIs. Initially, when a user uploads a video, the frontend sends the video to the backend for processing. After the video is processed, users can navigate through the extracted frames by sending requests to the backend for each frame they wish to view.</p>
+
+                <p>All of these actions take place within the same page, providing a seamless experience for users. The interface is designed to be responsive, ensuring that the application functions optimally on both desktop and mobile devices, with easy-to-use navigation and clear visual feedback on the video processing status.</p>
+            <img src="../assets/screenshot1.png" style="width: 800px; margin-right: 100px"/>
+            
+            <img src="./assets/phoness.png" style="height: 500px;"/>
+            
+            <h4>Backend</h4>
+                <p>The backend of the TraS (Traffic Sign Detection) application is implemented using Node.js with Express. It serves as the central coordinator, managing communication between the frontend and microservices while handling video uploads, processing requests, and enriching data with semantic information.</p>
+
+                <p>The main responsibilities of the backend include:</p>
+                <ul>
+                    <li><strong>Video Upload and Processing:</strong> The backend handles video uploads from the frontend, sending the video to the video processor microservice for frame extraction and processing.</li>
+                    <li><strong>Task Coordination:</strong> It delegates tasks such as video processing and sign detection to the appropriate microservices, ensuring smooth operation across the system.</li>
+                    <li><strong>Semantic Enrichment:</strong> After traffic sign detection, the backend enriches the results with additional semantic information from the OWL Knowledge Service.</li>
+                </ul>
+
+                <p>The backend provides two key routes:</p>
+                <ul>
+                    <li><strong>/video/upload:</strong> Handles video uploads from the frontend, processes the video, and stores frame data.</li>
+                    <li><strong>/yolo/detect:</strong> Sends image frames to the YOLO microservice for traffic sign detection and retrieves results.</li>
+                </ul>
+
+                <p>The backend communicates with other microservices via REST APIs and interacts with a database to store and retrieve information about processed videos and detected signs. Further details about the REST API endpoints will be covered in the API section.</p>
+
+
+                <h4>Video Processing Service</h4>
+                <p>The Video Processing Service is developed in Python, utilizing OpenCV for frame extraction from uploaded videos. It plays a crucial role in breaking down videos into individual frames for further analysis, particularly for traffic sign detection.</p>
+
+                <p>The key features and responsibilities of the Video Processing Service are:</p>
+                <ul>
+                    <li><strong>Frame Extraction:</strong> The service processes uploaded videos, extracting frames at a predefined frequency (FPS) using OpenCV.</li>
+                    <li><strong>Cloud Storage:</strong> Extracted frames are stored securely in Google Cloud Storage (GCS), ensuring scalable and accessible storage for further processing.</li>
+                    <li><strong>Frame Metadata:</strong> The service returns metadata regarding the extracted frames, such as frame IDs and the total count, to the backend for further use in traffic sign detection.</li>
+                </ul>
+
+                <p>The service exposes a single API route:</p>
+                <ul>
+                    <li><strong>/api/process-video:</strong> This POST route receives video URLs and processing parameters from the backend, extracts frames, stores them in cloud storage, and returns the frame metadata.</li>
+                </ul>
+
+                <p>This service plays a vital role in preparing the video data for subsequent analysis by the YOLO traffic sign detection microservice.</p>
+
+
+                <h4>YOLO Detection Service</h4>
+                <p>The YOLO Detection Service is responsible for detecting traffic signs in frames using the YOLOv8 model, which has been trained specifically for recognizing traffic signs, such as traffic lights, speed signs, and stop signs. This service is implemented in Python using the Ultralytics YOLO package and plays a critical role in traffic sign detection within the system.</p>
+                
+                <p>The key features and responsibilities of the YOLO Detection Service are:</p>
+                <ul>
+                    <li><strong>YOLOv8 Model:</strong> The service uses a custom-trained YOLOv8 model that can identify traffic signs with high accuracy. The model has been trained on a custom dataset containing traffic light, speed sign, and stop sign images.</li>
+                    <li><strong>Image Processing:</strong> Once a frame is received, the service processes the image and applies the YOLOv8 model to detect traffic signs.</li>
+                    <li><strong>Detection Results:</strong> The service returns the detected traffic signs, including the bounding box, sign type (class), and confidence level for each detected sign.</li>
+                    <li><strong>Single API Route:</strong> The service exposes a single route, <code>/api/detect</code>, which receives an image file, processes it, and returns the detection results.</li>
+                </ul>
+                
+                <p>The service works as follows:</p>
+                <ol>
+                    <li>The backend sends an image (frame) to the service.</li>
+                    <li>YOLOv8 processes the image to detect traffic signs.</li>
+                    <li>Detection results are returned, including bounding boxes, class IDs (e.g., traffic light, speed sign), and confidence values.</li>
+                    <li>The results are then sent back to the backend for further use (e.g., for displaying results to the user).</li>
+                </ol>
+                
+                <p>The service is highly optimized for traffic sign detection, offering real-time or near-real-time processing of video frames.</p>
+
+                <h4>MongoDB Service</h4>
+            <p>The MongoDB Service serves as the data storage layer for the TraS (Traffic Sign Detection) application. It stores and manages essential metadata for uploaded videos, extracted frames, and detected traffic signs. MongoDB, a NoSQL database, is chosen for its flexibility and scalability, allowing efficient storage and retrieval of diverse data structures, such as video metadata and detection results.</p>
+
+            <p>The key responsibilities of the MongoDB Service include:</p>
+            <ul>
+                <li><strong>Video Metadata Storage:</strong> Stores metadata related to uploaded videos, including video IDs, URLs, and frame count, which are essential for video processing and display in the frontend.</li>
+                <li><strong>Frame Metadata Storage:</strong> Keeps track of each extracted frame, including its ID, associated video, and its processed status, such as detection results and frame-specific data.</li>
+                <li><strong>Detection Results:</strong> Stores the detected traffic signs in each frame, including their bounding boxes, class IDs (e.g., traffic lights, speed signs), confidence scores, and any associated semantic information.</li>
+                <li><strong>Efficient Data Retrieval:</strong> Optimized for fast and scalable queries, allowing the frontend to retrieve relevant video and frame information (such as detected traffic signs) quickly for display and interaction.</li>
+            </ul>
+
+            <p>The MongoDB Service provides an essential backend component that supports the overall functionality of the TraS application, ensuring that video and frame data, along with detection results, are stored and retrieved efficiently for use by the frontend interface.</p>
+
+            <h4>OWL Knowledge Service</h4>
+            <p>The OWL Knowledge Service plays a pivotal role in enriching the traffic sign detection results by providing additional semantic information from an RDF (Resource Description Framework) triplestore. For this purpose, the service utilizes a powerful RDF triplestore such as Blazegraph, which is capable of efficiently storing and querying structured data in the form of RDF triples.</p>
+            <p>The RDF model utilizes a rich set of classes and properties that describe different aspects of traffic signs. For example, SpeedLimit30 and StopSign are defined as classes, representing specific types of traffic signs. These classes are connected to other entities through object properties such as hasContext and isRegulatedBy. The hasContext property links a traffic sign to the type of road or environmental condition, like an urban road or a highway, while isRegulatedBy links traffic signs to the regulations that govern them, such as a speed limit or the requirement to stop at an intersection.
+
+                Additionally, the model includes datatype properties, like description, which offer textual descriptions of each sign, providing further detail and clarity. This level of detail not only enriches the data representation but also supports advanced reasoning and querying operations.</p>
+
+                <p>Once the RDF model is structured, querying over it becomes a critical aspect of its usability. The most effective way to interact with the RDF data is through SPARQL, the standard query language for querying RDF datasets.</p>
+            <p>The SPARQL query used for retrieving all the informations regarding a certain traffic sign is <img src="./assets/query.png" style="display: flex; margin-left:auto; margin-right:auto"/> </p>
+            
+            <h4> Cloud Services</h4>
+            <p>For handling video and image processing in the cloud, we utilize Google Cloud Platform (GCP) services:</p>
+            <ul>
+                <li>GCP Storage: used to store raw videos and extracted frames securely and at scale. It offers high durability, redundancy, and various storage classes for different access needs.</li>
+                <li>GCP Compute Engine / Cloud Run: GCP Compute Engine provides virtual machines for running backend services with full control over infrastructure, offering scalability and high availability while Cloud Run allows deployment of containerized microservices that auto-scale based on demand, providing a serverless solution for processing tasks. </li>
+            </ul>
+            
+            
+            
+            <br><h3>Infrastructure</h3>
+            <p>The TraS system is built using a service-oriented architecture (SOA), ensuring scalability, modularity, and efficient traffic sign detection from video recordings. The system consists of multiple independent services, each responsible for a specific function, interacting via well-defined APIs.</p>
+            <p>This section provides an overview of the system`s infrastructure, focusing on service interactions and communication flow.</p>
+
+            <h4>System architecture</h4>
+            <p> The following diagram illustrates the high-level design of the TraS system:<br> <img src="./assets/software_architecture.png" style="display: flex; margin-left:auto; margin-right:auto"/></p>
+
+            <p>Each service within the system plays a distinct role while maintaining independence, ensuring seamless interaction through REST APIs, database queries, and cloud storage. The key service interactions include:</p>
+            <ul>
+                <li>Frontend → Backend: Handles user requests, including video uploads, frame navigation, and viewing detection results.</li>
+                <li>Backend → GCP Storage: Stores raw videos and extracted frames.</li>
+                <li>Backend → Video Processing Service: Delegates frame extraction tasks.</li>
+                <li>Backend → YOLO Detection Service: Requests traffic sign detection in frames.</li>
+                <li>Backend → MongoDB: Stores metadata for videos, frames, and detections.</li>
+                <li>Backend → OWL Knowledge Service: Queries semantic data for detected signs.</li>
+            </ul>
+
+            <h4>Data flow</h4>
+            <p>To process and analyze traffic signs effectively, the system follows a structured workflow. Each service performs a predefined role, contributing to an efficient data pipeline.</p>
+            <ol>
+                <li>
+                    Video upload and storage
+                    <ul>
+                        <li>
+                            The frontend sends a request to the backend to upload a video. 
+                        </li>
+                        <li>
+                            The backend stores the video in GCP Storage and records its metadata in MongoDB.
+                        </li>
+                        <li>
+                            The backend notifies the video processing service about the new video.
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    Frame extraction
+                    <ul>
+                        <li>
+                            The video processing service extracts frames from the uploaded video. 
+                        </li>
+                        <li>
+                            Extracted frames are stored in GCP Storage.
+
+                        </li>
+                        <li>
+                            The service returns a list of frame IDs and frame count to the backend.
+                        </li>
+                        <li>
+                            The backend stores this metadata in MongoDB and sends it to the frontend.
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    Frame selection and traffic sign detection
+                    <ul>
+                        <li>
+                            The frontend allows users to navigate through frames and select one for detection.
+                        </li>
+                        <li>
+                            When a frame is selected, the frontend requests the backend to run detection.
+                        </li>
+                        <li>
+                            The backend retrieves the frame from GCP Storage and sends it to the YOLO detection service.
+
+                        </li>
+                        <li>
+                            The YOLO detection service analyzes the frame and returns detected signs with bounding boxes and confidence scores.
+                        </li>
+                        <li>
+                            The backend stores detection results in MongoDB.
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    Semantic enrichment
+                    <ul>
+                        <li>
+                            The backend queries the OWL Knowledge Service using SPARQL to get additional information about detected signs.
+
+                        </li>
+                        <li>
+                            The OWL service responds with legal meanings and regulations associated with the detected traffic signs.
+
+                        </li>
+                        <li>
+                            The backend integrates this semantic information with the detection results and sends the final response to the frontend.
+
+                        </li>
+                    
+                    </ul>
+                </li>
+            </ol>
+            In the end, the frontend displays detected signs and enriched information.
+
+
+            <br><h3>APIS</h3>
+            <p>The backend serves as the core orchestrator, handling video uploads, detection requests, and managing data flow between microservices and the database (MongoDB). It exposes two primary RESTful APIs for video processing and traffic sign detection.</p>
+            
+            <p>
+                <ol>
+                    <li>
+                        <b>/upload</b> (Video Upload & Processing)
+                        <ul>
+                            <li>Method: POST</li>
+                            <li>Purpose: Uploads a video file, stores it, and sends it to the video-processing microservice.</li>
+                            <li>Consumes: multipart/form-data</li>
+                            <li>
+                                Workflow: Receives a video file from the user. Generates an unique id and uploads the video to GCS. Then sends the video url to processing microservice, and stores the metadata and frames returned by it.
+                            </li>
+                            <li>Responses: 200 for successfully processed video, 400 if no video was uploaded and 500 in case of internal server errors.</li>
+                            <li>The api is documented using swagger and can be tested at <i>/apidocs</i> when running the backend locally.</li>
+                            <img src="./assets/be-upload-swagger.png" width="800px" style="display: flex; margin-left:auto; margin-right:auto"/>
+                        </ul>
+                    </li>
+                    <li>
+                        <b>/detect</b> (Traffic Sign Detection)
+                        <ul>
+                            <li>Method: POST</li>
+                            <li>Purpose: Detects traffic signs in a frame using the YOLO microservice.</li>
+                            <li>Consumes: application/json</li>
+                            <li>
+                                Workflow: Receives an image URL and video ID from the client and downloads the image locally. Send the image to yolo service from which it retrieves the signs and the coordonates, then calls the ontology service for aditional informations and updated the mongoDb. 
+                            </li>
+                            <li>Responses: 200 for successfully detected traffic signs, 400 if no image URL or video ID provided. and 500 in case of YOLO service errors.</li>
+                            <li>The api is documented using swagger and can be tested at <i>/apidocs</i> when running the backend locally.</li>
+                            <img src="./assets/be-detect-swagger.png" width="800px" style="display: flex; margin-left:auto; margin-right:auto"/>
+                        </ul>
+                    </li>
+                </ol>
+            </p>
+
+            <p>The TraS system includes two core microservices, each responsible for processing video and detecting traffic signs. These services are lightweight, scalable, and designed for efficient interaction with the backend.</p>
+            <p>
+                <ol>
+                    <li>
+                        <b> /api/process-video </b> (Video Processing Microservice)
+                        <ul>
+                            <li>Purpose: Extracts frames from uploaded videos and stores them in Google Cloud Storage (GCS).</li>
+                            <li>Key Features: Downloads videos from a provided URL (GCS link),Extracts frames at a configurable FPS.
+                                Uploads extracted frames to GCS, returning URLs for each. </li>
+                            <li><img src="./assets/micro-process-video-swagger.png" width="800px" style="display: flex; margin-left:auto; margin-right:auto"/></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <b> /api/detect </b> (YOLO Traffic Sign Detection Microservice)
+                        <ul>
+                            <li>Purpose:  Identifies traffic signs in images using a YOLO (You Only Look Once) model.</li>
+                            <li>Key Features: Accepts images and detects traffic signs with bounding boxes.
+                                Uses pre-trained YOLOv8 for real-time inference.
+                                Returns class ID, confidence score, and bounding box coordinates. </li>
+                            <li><img src="./assets/micro-yolo-detect-swagger.png" width="800px" style="display: flex; margin-left:auto; margin-right:auto"/></li>
+                        </ul>
+                    </li>
+                </ol>
+            </p>
+        </section>
+        <h2>Deployment</h2>
+        <section id="deployment" class="my-5">
+            <p>The TraS system is designed with scalability, fault tolerance, and efficient processing in mind. It follows a microservices-based architecture, leveraging Google Cloud services to ensure optimal performance and reliability. The architecture consists of containerized services deployed in a cloud environment, enabling seamless communication between different system components.</p>
+            <p>The system is deployed on Google Cloud to take advantage of its managed services and auto-scaling capabilities:</p>
+            <ul>
+                <li>Backend & Microservices → Hosted on Google Cloud Run, allowing for automatic scaling based on demand while ensuring efficient resource utilization.</li>
+                <li>MongoDB Atlas → A managed database service that provides high availability and scalability for storing metadata (videos, frames, detections).</li>
+                <li>OWL Knowledge Service → Deployed on an RDF triplestore like Blazegraph, enabling semantic querying for traffic sign knowledge.</li>
+                <li>Google Cloud Storage (GCS) → Stores videos and extracted frames, ensuring persistent and scalable storage.</li>
+            </ul>
+            <p>The infrastructure can be visually described here : </p>
+            <p><img src="./assets/cloud_infrastructure.png" style="display: flex; margin-left:auto; margin-right:auto"/></p>
+            <p>This cloud-native deployment model ensures the system can handle varying workloads, minimizing costs during low traffic and automatically scaling when demand increases.</p>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://example.com/tras#"
+     xml:base="http://example.com/tras"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:tras="http://example.com/tras#">
+    <owl:Ontology rdf:about="http://example.com/tras#">
+        <rdfs:comment>Ontology for Traffic Sign Detection and Classification</rdfs:comment>
+    </owl:Ontology>
+    
+    <!-- Object Properties -->
+
+    <owl:ObjectProperty rdf:about="http://example.com/tras#hasContext">
+        <rdfs:domain rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:range rdf:resource="http://example.com/tras#RoadType"/>
+        <rdfs:label>Has Context</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.com/tras#hasType">
+        <rdfs:domain rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:range rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:label>Has Type</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.com/tras#isComparedTo">
+        <rdfs:domain rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:range rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:label>Is Compared To</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.com/tras#isRegulatedBy">
+        <rdfs:domain rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:range rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <rdfs:label>Is Regulated By</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.com/tras#isRelatedTo">
+        <rdfs:domain rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:range rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:label>Is Related To</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.com/tras#offersAdvice">
+        <rdfs:domain rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:range rdf:resource="http://example.com/tras#PracticalAdvice"/>
+        <rdfs:label>Offers Advice</rdfs:label>
+    </owl:ObjectProperty>
+    
+    <!-- Data properties -->
+
+    <owl:DatatypeProperty rdf:about="http://example.com/tras#behaviorSuggestion">
+        <rdfs:domain rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>Behavior Suggestion</rdfs:label>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.com/tras#description">
+        <rdfs:domain rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>Description</rdfs:label>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.com/tras#name">
+        <rdfs:domain rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>Name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+    <!-- Classes -->
+
+    <owl:Class rdf:about="http://example.com/tras#Informational">
+        <rdfs:subClassOf rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:label>Informational Sign</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.com/tras#LegalRegulation">
+        <rdfs:label>Legal Regulation</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.com/tras#Mandatory">
+        <rdfs:subClassOf rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:label>Mandatory Sign</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.com/tras#PracticalAdvice">
+        <rdfs:label>Practical Advice</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.com/tras#Prohibitory">
+        <rdfs:subClassOf rdf:resource="http://example.com/tras#TrafficSign"/>
+        <rdfs:label>Prohibitory Sign</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.com/tras#RoadType">
+        <rdfs:label>Road Type</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://example.com/tras#TrafficSign">
+        <rdfs:label>Traffic Sign</rdfs:label>
+    </owl:Class>
+     
+    <!-- Individuals -->
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#StopBeforeProceeding">
+        <rdf:type rdf:resource="http://example.com/tras#PracticalAdvice"/>
+        <description>Ensure the way is clear before proceeding.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#StopSign">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#StopSignRegulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#StopBeforeProceeding"/>
+        <description>A sign indicating vehicles must stop before proceeding.</description>
+        <name>Stop Sign</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#StopSignRegulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must come to a complete stop at the sign.</description>
+    </owl:NamedIndividual>
+    
+    <owl:NamedIndividual rdf:about="http://example.com/tras#Urban">
+        <rdf:type rdf:resource="http://example.com/tras#RoadType"/>
+        <description>Urban roads or city streets.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit20">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#SpeedLimit20Regulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#MaintainSafeSpeed"/>
+        <description>A sign indicating the speed limit is 20 km/h.</description>
+        <name>Speed Limit 20</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit20Regulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must not exceed a speed of 20 km/h.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit30">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#SpeedLimit30Regulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#MaintainSafeSpeed"/>
+        <description>A sign indicating the speed limit is 30 km/h.</description>
+        <name>Speed Limit 30</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit30Regulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must not exceed a speed of 30 km/h.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit40">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#SpeedLimit40Regulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#MaintainSafeSpeed"/>
+        <description>A sign indicating the speed limit is 40 km/h.</description>
+        <name>Speed Limit 40</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit40Regulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must not exceed a speed of 40 km/h.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit50">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#SpeedLimit50Regulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#MaintainSafeSpeed"/>
+        <description>A sign indicating the speed limit is 50 km/h.</description>
+        <name>Speed Limit 50</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit50Regulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must not exceed a speed of 50 km/h.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit60">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#SpeedLimit60Regulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#MaintainSafeSpeed"/>
+        <description>A sign indicating the speed limit is 60 km/h.</description>
+        <name>Speed Limit 60</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit60Regulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must not exceed a speed of 60 km/h.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit70">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#SpeedLimit70Regulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#MaintainSafeSpeed"/>
+        <description>A sign indicating the speed limit is 70 km/h.</description>
+        <name>Speed Limit 70</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit70Regulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must not exceed a speed of 70 km/h.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit80">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#SpeedLimit80Regulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#MaintainSafeSpeed"/>
+        <description>A sign indicating the speed limit is 80 km/h.</description>
+        <name>Speed Limit 80</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit80Regulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must not exceed a speed of 80 km/h.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit90">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#SpeedLimit90Regulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#MaintainSafeSpeed"/>
+        <description>A sign indicating the speed limit is 90 km/h.</description>
+        <name>Speed Limit 90</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit90Regulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must not exceed a speed of 90 km/h.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit100">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#SpeedLimit100Regulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#MaintainSafeSpeed"/>
+        <description>A sign indicating the speed limit is 100 km/h.</description>
+        <name>Speed Limit 100</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit100Regulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must not exceed a speed of 100 km/h.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit110">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#SpeedLimit110Regulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#MaintainSafeSpeed"/>
+        <description>A sign indicating the speed limit is 110 km/h.</description>
+        <name>Speed Limit 110</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit110Regulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must not exceed a speed of 110 km/h.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit120">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#SpeedLimit120Regulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#MaintainSafeSpeed"/>
+        <description>A sign indicating the speed limit is 120 km/h.</description>
+        <name>Speed Limit 120</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#SpeedLimit120Regulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must not exceed a speed of 120 km/h.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#MaintainSafeSpeed">
+        <rdf:type rdf:resource="http://example.com/tras#PracticalAdvice"/>
+        <description>Drive at a safe and controlled speed within the limit.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#GreenLight">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#GreenLightRegulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#ProceedWithCaution"/>
+        <description>A signal indicating vehicles may proceed.</description>
+        <name>Green Light</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#GreenLightRegulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles are allowed to proceed when the light is green.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#RedLight">
+        <rdf:type rdf:resource="http://example.com/tras#Mandatory"/>
+        <rdf:type rdf:resource="http://example.com/tras#TrafficSign"/>
+        <hasContext rdf:resource="http://example.com/tras#Urban"/>
+        <isRegulatedBy rdf:resource="http://example.com/tras#RedLightRegulation"/>
+        <offersAdvice rdf:resource="http://example.com/tras#StopImmediately"/>
+        <description>A signal indicating vehicles must stop.</description>
+        <name>Red Light</name>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#RedLightRegulation">
+        <rdf:type rdf:resource="http://example.com/tras#LegalRegulation"/>
+        <description>Vehicles must come to a complete stop when the light is red.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#ProceedWithCaution">
+        <rdf:type rdf:resource="http://example.com/tras#PracticalAdvice"/>
+        <description>Ensure it is safe before proceeding.</description>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://example.com/tras#StopImmediately">
+        <rdf:type rdf:resource="http://example.com/tras#PracticalAdvice"/>
+        <description>Stop the vehicle completely at the red light.</description>
+    </owl:NamedIndividual>
+
+</rdf:RDF>
+

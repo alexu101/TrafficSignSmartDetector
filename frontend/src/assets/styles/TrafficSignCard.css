@@ -1,0 +1,66 @@
+.trafficSignCard{
+  cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: 100px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 13px;
+    margin-top: 10px;
+    border: solid 2px rgb(68, 10, 122);
+}
+
+@media (max-width: 768px) {
+    .trafficSignInformationContainer {
+      max-width: 100%;
+      padding: 12px;
+    }
+  
+    .trafficSignInfoTitle {
+      font-size: 16px;
+    }
+  
+    .trafficSignCard {
+      font-size: 13px;
+      padding: 10px;
+    }
+  }
+
+
+.trafficSignRegulations{
+    display: flex;
+    flex-direction: column;
+}
+ 
+.trafficSignRegulations > *{
+    margin: 5px 0px;
+}
+
+.trafficSignId{
+    font-weight: 600;
+}
+
+.ontologyItem{
+    display: flex;
+    justify-content: space-between;
+    text-align: end;
+    padding: 5px 0px;
+}
+
+.ontologyItem .left {
+  color: rgb(68, 10, 122);
+}
+
+.ontologyItemName{
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.trafficSignOntologyDetails{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 15px;
+    justify-content: space-between;
+}

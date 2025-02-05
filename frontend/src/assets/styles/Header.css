@@ -1,0 +1,31 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    padding: 10px;
+    color:white;
+    background: rgb(51,19,54);
+    background: -moz-linear-gradient(127deg, rgba(51,19,54,1) 43%, rgba(51,7,112,1) 97%);
+    background: -webkit-linear-gradient(127deg, rgba(51,19,54,1) 43%, rgba(51,7,112,1) 97%);
+    background: linear-gradient(127deg, rgba(51,19,54,1) 43%, rgba(51,7,112,1) 97%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#331336",endColorstr="#330770",GradientType=1);
+}
+
+.logos {
+    display: flex;
+    gap: 10px;
+    margin-right: auto;
+}
+
+.logo{
+    height: 50px;
+}
+
+.title {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    margin-right: auto;
+}

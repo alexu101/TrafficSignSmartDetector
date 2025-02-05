@@ -1,0 +1,38 @@
+name: Deploy Backend to Cloud Run
+
+on:
+  push:
+    branches:
+      - backend_development  # Runs only when pushing to backend_development branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Set Up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+
+      - name: Define Image Name
+        run: echo "FULL_IMAGE_NAME=us-central1-docker.pkg.dev/bamboo-volt-449523-r5/tras-repo/backend-service" >> $GITHUB_ENV
+
+      - name: Set Up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and Push Docker Image (with Cache)
+        working-directory: backend
+        run: docker buildx build --cache-from=type=registry,ref=$FULL_IMAGE_NAME:cache --cache-to=type=registry,ref=$FULL_IMAGE_NAME:cache,mode=max -t $FULL_IMAGE_NAME . --push
+
+      - name: Deploy to Cloud Run
+        run: gcloud run deploy backend-service --image=$FULL_IMAGE_NAME --platform=managed --region=us-central1 --memory=2Gi --allow-unauthenticated --set-env-vars=GCS_BUCKET_NAME=tras-bucket,MONGO_URI=mongodb+srv://mongo:mongo@cluster0.sgnam.mongodb.net/tras_db

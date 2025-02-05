@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+  height: 95vh;
+  align-items: start;
+}
+
+.mainContainer{
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  margin-top: 20px;
+  height: calc(100vh - 80px);
+}
+
+@media (max-width: 768px) {
+  .mainContainer {
+    flex-direction: column;
+  }
+  .loadInput, .trafficSignInformation {
+    flex: none;
+    width: 100%;
+  }
+}
+
+
