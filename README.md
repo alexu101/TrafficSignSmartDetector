@@ -6,15 +6,6 @@
   <p>
     <b>TraS</b> is a web application developed as part of the evaluation for the Web Application Development discipline.
   </p>
-
-<p>
-  <a href="https://github.com/StefanRoman1/TraS/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/StefanRoman1/TraS" alt="contributors" />
-  </a>
-  <a href="">
-    <img src="https://img.shields.io/github/last-commit/StefanRoman1/TraS" alt="last update" />
-  </a>
-</p>
    
 </div>
 
