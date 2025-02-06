@@ -54,6 +54,12 @@ The TraS (Traffic Sign Smart Detector) project is a microservice-based web syste
     <li><a href="https://blazegraph.com/">Blazegraph</a></li>
   </ul>
 
+<summary>Hosting</summary>
+<ul>
+  <li>Google Cloud Platform</li>
+  <li>Docker</li>
+</ul>
+
 <!-- Features -->
 ## :dart: Features
 
